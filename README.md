@@ -1,7 +1,5 @@
 
-
-
-###`Data Extrapolation`
+### `Data Extrapolation`
 
 For Date Extraploation I have used faker to generate random values.
 
