@@ -91,7 +91,8 @@ userActivity=  async(date)=>{
         <div className="site-card-wrapper">
             <Row >
               <Col sz={6}>
-                <Card title="Activity: 2020/04/04" >
+                <Card title={'Activity :'+ this.props.date }>
+
                   <ul>
                     <li>Login: <span style={{color:'green'}}>{data.time_ranges[0].start_time}</span></li>
                     <li>Logout:  <span style={{color:'red'}}>{data.time_ranges[0].end_time}</span></li>

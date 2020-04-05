@@ -12,7 +12,7 @@ export default class UserInfo extends React.Component {
 
     this.state = {
         click:false,
-        modal_info:[]
+        modal_info:[],
     }
   }
     Openmodal=(evt)=>{
@@ -20,13 +20,35 @@ export default class UserInfo extends React.Component {
           modal_info:evt
     })
     }
+today_date=()=>{
 
+  
+    let dateObj = new Date();
+  let year = dateObj.getFullYear().toString().length === 1
+      ? "0" + dateObj.getFullYear()
+      : dateObj.getFullYear();
+  let month =
+    (dateObj.getMonth() + 1).toString().length === 1
+      ? "0" + (dateObj.getMonth() + 1)
+      : dateObj.getMonth() + 1;
+  let date =
+    dateObj.getDate().toString().length === 1
+      ? "0" + dateObj.getDate()
+      : dateObj.getDate();
+
+  let dateString = `${year}/${month}/${date}`;
+
+  return dateString
+}
+    
 
   render() {
 
     let dict = this.props.user_data;
     const {click,modal_info}=this.state;
     var arr = [];
+
+    let date=this.today_date()
     
     for (let i=1;i<dict.length;i++) {
 
@@ -34,7 +56,7 @@ export default class UserInfo extends React.Component {
                 title:dict[i]['real_name'],
                 id:dict[i]['id'],
                 location:dict[i]['tz'],
-                time_ranges:dict[i]['activity_periods']['2020/04/04']
+                time_ranges:dict[i]['activity_periods'][date]
 
           })}
     
@@ -44,7 +66,7 @@ export default class UserInfo extends React.Component {
       <React.Fragment>
            <div  className="site-card-border-less-wrapper">
     <Card title="Users" bordered={true} style={{ width: 600 }}>
-    {click && <UserModal  user_data={modal_info} action={(evt)=>(this.setState({click:evt}))} /> }
+    {click && <UserModal  user_data={modal_info} date={date} action={(evt)=>(this.setState({click:evt}))} /> }
 
     <Content>
         <List
